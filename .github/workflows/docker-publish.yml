@@ -25,8 +25,6 @@ jobs:
 
       - name: Install cosign
         uses: sigstore/cosign-installer@main
-        with:
-          cosign-release: 'v1.4.1'
 
       - name: Setup Docker buildx
         uses: docker/setup-buildx-action@v2
@@ -46,5 +44,5 @@ jobs:
           tags: ghcr.io/${{ github.repository }}:latest
 
       - name: Sign the container image
-        run: cosign sign ghcr.io/${{ github.repository }}@${{ steps.push-step.outputs.digest }}
+        run: cosign sign --yes ghcr.io/${{ github.repository }}@${{ steps.push-step.outputs.digest }}
 
